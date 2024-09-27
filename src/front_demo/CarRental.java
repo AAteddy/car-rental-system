@@ -9,8 +9,8 @@ public class CarRental {
 
     public CarRental() {
         scn = new Scanner(System.in);
-        carMgr = new CarManager();
         customerMgr = new CustomerManager();
+        carMgr = new CarManager(customerMgr);
 
         homePage();
     }

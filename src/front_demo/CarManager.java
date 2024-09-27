@@ -1,14 +1,20 @@
 package front_demo;
 
+import skeleton_interface.ICar;
+import skeleton_interface.ICustomer;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarManager {
     private final Scanner scn;
+    private ArrayList<ICar> carsRepo;
+    private CustomerManager custMgr;
 
-    public CarManager() {
+    public CarManager(CustomerManager customMgr) {
         scn = new Scanner(System.in);
-
-
+        carsRepo = new ArrayList<>();
+        this.custMgr = customMgr;
     }
 
     public void manageCar() {
@@ -55,20 +61,60 @@ public class CarManager {
     }
 
     private void addCar() {
+        System.out.println("*** Adding New Car ***");
+        System.out.println("Enter brand");
+        String brand = scn.next();
+
+        carsRepo.add(ICar.createCar(brand));
     }
 
     private void rentCar() {
+        System.out.println("** Renting A Car **");
+        reportFreeCars();
+        System.out.println("Choose A Car: ");
+        int carNo = scn.nextInt();
+
+        custMgr.reportCustomer();
+        System.out.println("Choose A Customer: ");
+        int custNo = scn.nextInt();
+        ICustomer c = custMgr.getCustomerById(custNo);
+        carsRepo.get(carNo -1 ).rentTo(c);
     }
 
     private void returnCar() {
+        System.out.println("** Returning A Car **");
+        reportRentedCars();
+        System.out.println("Enter a Car: ");
+        int carNo = scn.nextInt();
+
+        carsRepo.get(carNo - 1).returnCar();
     }
 
     private void reportAllCars() {
+        int i = 1;
+        System.out.println("** Reporting All Cars **");
+        System.out.println("No\t\tBrand\t\tCustomer");
+        for (ICar x : carsRepo)
+            System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
+
     }
 
     private void reportRentedCars() {
+        int i = 1;
+        System.out.println("** Reporting Free Cars **");
+        System.out.println("No\t\tBrand\t\tCustomer");
+        for (ICar x : carsRepo)
+            if (x.isRented())
+                System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
+
     }
 
     private void reportFreeCars() {
+        int i = 1;
+        System.out.println("** Reporting Free Cars **");
+        System.out.println("No\t\tBrand\t\tCustomer");
+        for (ICar x : carsRepo)
+            if (!x.isRented())
+             System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
     }
 }
