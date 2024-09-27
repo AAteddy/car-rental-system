@@ -4,9 +4,13 @@ import java.util.Scanner;
 
 public class CarRental {
     private final Scanner scn;
+    private CarManager carMgr;
+    private CustomerManager customerMgr;
 
     public CarRental() {
         scn = new Scanner(System.in);
+        carMgr = new CarManager();
+        customerMgr = new CustomerManager();
 
         homePage();
     }
@@ -24,10 +28,10 @@ public class CarRental {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Car Management");
+                    carMgr.manageCar();
                     break;
                 case 2:
-                    System.out.println("Customer Management");
+                    customerMgr.manageCustomer();
                     break;
                 case 0:
                     System.out.println("Exiting from system...");
