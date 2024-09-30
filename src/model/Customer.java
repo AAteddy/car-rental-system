@@ -13,4 +13,8 @@ public class Customer implements ICustomer {
     public String getFname() {
         return fName;
     }
+
+    public String toString() {
+        return fName;
+    }
 }

@@ -3,7 +3,7 @@ package front_demo;
 import java.util.Scanner;
 
 public class CarRental {
-    private final Scanner scn;
+    private Scanner scn;
     private CarManager carMgr;
     private CustomerManager customerMgr;
 

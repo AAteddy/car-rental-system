@@ -34,6 +34,6 @@ public class Car implements ICar {
 
     @Override
     public ICustomer getRenter() {
-        return renter;
+        return this.renter;
     }
 }

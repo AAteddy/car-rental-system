@@ -12,7 +12,7 @@ public class CustomerManager {
 
     public CustomerManager() {
          scn = new Scanner(System.in);
-         customerRepo = new ArrayList<>();
+         customerRepo = new ArrayList<ICustomer>();
     }
 
     public void manageCustomer() {
@@ -45,21 +45,22 @@ public class CustomerManager {
     private void addCustomer() {
         System.out.println("*** Adding New Customer ***");
         System.out.println("Enter name");
-        ICustomer c = null;
         String name = scn.next();
         customerRepo.add(ICustomer.createCust(name));
     }
 
     public void reportCustomer() {
-        int i=1;
         System.out.println("*** Reporting Customers ***");
         System.out.println("No\t\tName");
-        for (ICustomer x : customerRepo)
-            System.out.println(i++ + "\t\t" + x.getFname());
+        for (int i = 0; i < customerRepo.size(); i++) {
+            System.out.println((i+1) + "\t\t" + customerRepo.get(i).getFname());
+        }
+//        for (ICustomer x : customerRepo)
+//            System.out.println(i++ + "\t\t" + x.getFname());
     }
 
     public ICustomer getCustomerById(int custmNo) {
-        if (custmNo > 0)
+        if (custmNo > 0 && custmNo <= customerRepo.size())
             return customerRepo.get(custmNo - 1);
         return null;
     }

@@ -78,7 +78,7 @@ public class CarManager {
         System.out.println("Choose A Customer: ");
         int custNo = scn.nextInt();
         ICustomer c = custMgr.getCustomerById(custNo);
-        carsRepo.get(carNo -1 ).rentTo(c);
+        carsRepo.get(carNo - 1).rentTo(c);
     }
 
     private void returnCar() {
@@ -91,30 +91,35 @@ public class CarManager {
     }
 
     private void reportAllCars() {
-        int i = 1;
         System.out.println("** Reporting All Cars **");
         System.out.println("No\t\tBrand\t\tCustomer");
-        for (ICar x : carsRepo)
-            System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
+        for (int j = 0; j < carsRepo.size(); j++) {
+            System.out.println((j + 1) + "\t\t" + carsRepo.get(j).getBrand() + "\t\t" + carsRepo.get(j).getRenter());
+        }
+//        for (ICar x : carsRepo)
+//            System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
 
     }
 
     private void reportRentedCars() {
-        int i = 1;
         System.out.println("** Reporting Free Cars **");
         System.out.println("No\t\tBrand\t\tCustomer");
-        for (ICar x : carsRepo)
-            if (x.isRented())
-                System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
+        for (int i = 0; i < carsRepo.size(); i++) {
+            if (carsRepo.get(i).isRented())
+                System.out.println((i + 1) + "\t\t" + carsRepo.get(i).getBrand() + "\t\t" + carsRepo.get(i).getRenter());
+        }
+//        for (ICar x : carsRepo)
+//            if (x.isRented())
+//                System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
 
     }
 
     private void reportFreeCars() {
-        int i = 1;
         System.out.println("** Reporting Free Cars **");
         System.out.println("No\t\tBrand\t\tCustomer");
-        for (ICar x : carsRepo)
-            if (!x.isRented())
-             System.out.println(i++ + "\t\t" + x.getBrand() + "\t\t" + x.getRenter());
+        for (int i = 0; i < carsRepo.size(); i++) {
+            if (!carsRepo.get(i).isRented())
+                System.out.println((i + 1) + "\t\t" + carsRepo.get(i).getBrand() + "\t\t" + carsRepo.get(i).getRenter());
+        }
     }
 }
