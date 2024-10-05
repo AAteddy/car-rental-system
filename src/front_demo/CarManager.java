@@ -1,5 +1,7 @@
 package front_demo;
 
+
+import exception_handling.InvalidCustomerNumberException;
 import exception_handling.InvalidNamingException;
 import skeleton_interface.ICar;
 import skeleton_interface.ICustomer;
@@ -87,11 +89,19 @@ public class CarManager {
         System.out.println("Choose A Car: ");
         int carNo = scn.nextInt();
 
-        custMgr.reportCustomer();
-        System.out.println("Choose A Customer: ");
-        int custNo = scn.nextInt();
-        ICustomer c = custMgr.getCustomerById(custNo);
-        carsRepo.get(carNo - 1).rentTo(c);
+        do {
+            custMgr.reportCustomer();
+            System.out.println("Choose A Customer: ");
+            int custNo = scn.nextInt();
+            try {
+                ICustomer c = custMgr.getCustomerById(custNo);
+                carsRepo.get(carNo - 1).rentTo(c);
+                break;
+            } catch (InvalidCustomerNumberException ex) {
+                //scn.next();
+                System.err.println(ex.getMessage());
+            }
+        } while(true);
     }
 
     private void returnCar() {

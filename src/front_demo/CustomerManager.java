@@ -1,5 +1,7 @@
 package front_demo;
 
+
+import exception_handling.InvalidCustomerNumberException;
 import exception_handling.InvalidNamingException;
 import skeleton_interface.ICustomer;
 
@@ -73,9 +75,9 @@ public class CustomerManager {
 //            System.out.println(i++ + "\t\t" + x.getFname());
     }
 
-    public ICustomer getCustomerById(int custmNo) {
-        if (custmNo < 0 && custmNo > customerRepo.size())
-            throw new InvalidCustomerNumber(custmNo + " is invalid customer number");
+    public ICustomer getCustomerById(int custmNo) throws InvalidCustomerNumberException{
+        if (custmNo < 0 || custmNo > customerRepo.size())
+            throw new InvalidCustomerNumberException(custmNo + " is invalid customer number");
         else
             return customerRepo.get(custmNo - 1);
     }
