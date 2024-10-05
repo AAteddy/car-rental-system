@@ -1,5 +1,6 @@
 package front_demo;
 
+import exception_handling.InvalidNamingException;
 import skeleton_interface.ICustomer;
 
 import java.util.ArrayList;
@@ -50,9 +51,16 @@ public class CustomerManager {
 
     private void addCustomer() {
         System.out.println("*** Adding New Customer ***");
-        System.out.println("Enter name");
-        String name = scn.next();
-        customerRepo.add(ICustomer.createCust(name));
+        do {
+            System.out.println("Enter name");
+            String name = scn.next();
+            try {
+                customerRepo.add(ICustomer.createCust(name));
+                break;
+            } catch (InvalidNamingException ex) {
+                System.err.println(ex.getMessage());
+            }
+        } while(true);
     }
 
     public void reportCustomer() {
@@ -66,8 +74,9 @@ public class CustomerManager {
     }
 
     public ICustomer getCustomerById(int custmNo) {
-        if (custmNo > 0 && custmNo <= customerRepo.size())
+        if (custmNo < 0 && custmNo > customerRepo.size())
+            throw new InvalidCustomerNumber(custmNo + " is invalid customer number");
+        else
             return customerRepo.get(custmNo - 1);
-        return null;
     }
 }

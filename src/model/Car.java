@@ -1,5 +1,6 @@
 package model;
 
+import exception_handling.InvalidNamingException;
 import skeleton_interface.ICar;
 import skeleton_interface.ICustomer;
 
@@ -7,8 +8,15 @@ public class Car implements ICar {
     private String brand;
     private ICustomer renter;
 
-    public Car(String brandName) {
-        this.brand = brandName;
+    public Car(String brandName) throws InvalidNamingException{
+        setBrand(brandName);
+    }
+
+    private void setBrand(String brandName) throws InvalidNamingException {
+        if (brandName.matches("[a-zA-Z]+"))
+            this.brand = brandName;
+        else
+            throw new InvalidNamingException(brandName + " is invalid brand name");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package skeleton_interface;
 
+import exception_handling.InvalidNamingException;
 import model.Car;
 
 public interface ICar {
@@ -10,7 +11,7 @@ public interface ICar {
     void returnCar();
     ICustomer getRenter();
 
-    static ICar createCar(String brand) {
+    static ICar createCar(String brand) throws InvalidNamingException {
         return new Car(brand);
     }
 }

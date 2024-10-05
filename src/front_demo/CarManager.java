@@ -1,5 +1,6 @@
 package front_demo;
 
+import exception_handling.InvalidNamingException;
 import skeleton_interface.ICar;
 import skeleton_interface.ICustomer;
 
@@ -67,10 +68,17 @@ public class CarManager {
 
     private void addCar() {
         System.out.println("*** Adding New Car ***");
-        System.out.println("Enter brand");
-        String brand = scn.next();
+        do {
+            System.out.println("Enter brand");
+            String brand = scn.next();
 
-        carsRepo.add(ICar.createCar(brand));
+            try {
+                carsRepo.add(ICar.createCar(brand));
+                break;
+            } catch (InvalidNamingException ex) {
+                System.err.println(ex.getMessage());
+            }
+        } while(true);
     }
 
     private void rentCar() {
