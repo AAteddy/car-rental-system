@@ -3,6 +3,7 @@ package front_demo;
 import skeleton_interface.ICustomer;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CustomerManager {
@@ -16,7 +17,7 @@ public class CustomerManager {
     }
 
     public void manageCustomer() {
-        int choice;
+        int choice=5;
 
         do {
             System.out.println("*** Customer Management ***");
@@ -24,7 +25,12 @@ public class CustomerManager {
             System.out.println("2. Report Customer");
             System.out.println("0. Back");
             System.out.println("Enter your Choice: ");
-            choice = scn.nextInt();
+            try {
+                choice = scn.nextInt();
+            } catch (InputMismatchException ex) {
+                scn.next();
+                System.err.println("Please enter a valid input number!");
+            }
 
             switch (choice) {
                 case 1:

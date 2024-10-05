@@ -1,5 +1,6 @@
 package front_demo;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CarRental {
@@ -16,7 +17,7 @@ public class CarRental {
     }
 
     private void homePage() {
-        int choice;
+        int choice = 5;
 
         do {
             System.out.println("*** Car Rental Management System ***");
@@ -24,8 +25,12 @@ public class CarRental {
             System.out.println("2. Customer Management");
             System.out.println("0. Exit");
             System.out.println("Enter your Choice: ");
-            choice = scn.nextInt();
-
+            try {
+                choice = scn.nextInt();
+            } catch (InputMismatchException ex){
+                scn.next();
+                System.err.println("Please enter a valid input number");
+            }
             switch (choice) {
                 case 1:
                     carMgr.manageCar();

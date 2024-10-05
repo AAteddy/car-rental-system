@@ -4,6 +4,7 @@ import skeleton_interface.ICar;
 import skeleton_interface.ICustomer;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CarManager {
@@ -18,7 +19,7 @@ public class CarManager {
     }
 
     public void manageCar() {
-        int choice;
+        int choice=9;
 
         do {
             System.out.println("*** Car Management ***");
@@ -30,8 +31,12 @@ public class CarManager {
             System.out.println("6. Report Free Cars");
             System.out.println("0. Back");
             System.out.println("Enter your Choice: ");
-            choice = scn.nextInt();
-
+            try {
+                choice = scn.nextInt();
+            } catch (InputMismatchException ex) {
+                scn.next();
+                System.err.println("Please enter a valid input number!");
+            }
             switch (choice) {
                 case 1:
                     addCar();
